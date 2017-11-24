@@ -1,3 +1,10 @@
+# Tesera Fork
+```bash
+cd examples/serverless-framework/aws
+npm install
+sls deploy
+```
+
 # serverless-chrome
 
 Serverless Chrome contains everything you need to get started running headless Chrome on AWS Lambda (possibly Azure and GCP Functions soon).

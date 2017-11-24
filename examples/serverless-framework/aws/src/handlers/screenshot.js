@@ -30,6 +30,7 @@ export default async function handler (event, context, callback) {
     isBase64Encoded: true,
     headers: {
       'Content-Type': 'image/png',
+      'Access-Control-Allow-Origin': '*'
     },
   })
 }

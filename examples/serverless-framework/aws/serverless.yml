@@ -1,10 +1,12 @@
-service: serverless-chrome-examples
+service: serverless-chrome
 
 provider:
   name: aws
   runtime: nodejs6.10
-  stage: dev
+  stage: ${opt:stage, 'dev'}
   region: us-east-1
+  apiKeys:
+    - yukon-${self:provider.stage}
   environment:
     DEBUG: "*"
     PAGE_LOAD_TIMEOUT: 20000
@@ -21,25 +23,25 @@ custom:
       - --hide-scrollbars
 
 functions:
-  version-info:
-    description: Headless Chrome Serverless-framework version info example
-    memorySize: 1024
-    timeout: 30
-    handler: src/handlers/version.default
-    events:
-      - http:
-          path: version-info
-          method: get
+#  version-info:
+#    description: Headless Chrome Serverless-framework version info example
+#    memorySize: 1024
+#    timeout: 30
+#    handler: src/handlers/version.default
+#    events:
+#      - http:
+#          path: version-info
+#          method: get
 
-  request-logger:
-    description: Headless Chrome Serverless-framework request logging example
-    memorySize: 1024
-    timeout: 30
-    handler: src/handlers/requestLogger.default
-    events:
-      - http:
-          path: request-logger
-          method: get
+#  request-logger:
+#    description: Headless Chrome Serverless-framework request logging example
+#    memorySize: 1024
+#    timeout: 30
+#    handler: src/handlers/requestLogger.default
+#    events:
+#      - http:
+#          path: request-logger
+#          method: get
 
   screenshot:
     description: Headless Chrome Serverless-framework screenshot example
@@ -50,23 +52,25 @@ functions:
       - http:
           path: screenshot
           method: get
+          cors: true
+          private: true
 
-  pdf:
-    description: Headless Chrome Serverless-framework PDF example
-    memorySize: 1536
-    timeout: 30
-    handler: src/handlers/pdf.default
-    events:
-      - http:
-          path: pdf
-          method: get
+#  pdf:
+#    description: Headless Chrome Serverless-framework PDF example
+#    memorySize: 1536
+#    timeout: 30
+#    handler: src/handlers/pdf.default
+#    events:
+#      - http:
+#          path: pdf
+#          method: get
 
-resources:
-  Resources:
-    ApiGatewayRestApi:
-      Properties:
-        BinaryMediaTypes:
-          - "*/*"
+#resources:
+#  Resources:
+#    ApiGatewayRestApi:
+#      Properties:
+#        BinaryMediaTypes:
+#          - "*/*"
 
     # Enable X-Ray tracing on Lambda functions
     # ScreenshotLambdaFunction:
